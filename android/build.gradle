@@ -1,0 +1,33 @@
+// Project-level build.gradle
+
+buildscript {
+    repositories {
+        google()      // Repositori Google
+        mavenCentral() // Repositori Maven
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.0.4' // Atau versi yang sesuai dengan Flutter/Android Studio Anda
+        classpath 'com.google.gms:google-services:4.4.2' // Firebase plugin untuk mengintegrasikan google-services
+    }
+}
+
+allprojects {
+    repositories {
+        google()      // Repositori Google
+        mavenCentral() // Repositori Maven
+    }
+}
+
+rootProject.buildDir = "../build" // Menentukan lokasi build untuk project root
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}" // Menentukan folder build per subproject
+}
+
+subprojects {
+    project.evaluationDependsOn(":app") // Menyatakan ketergantungan evaluasi pada app-level project
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir // Task untuk membersihkan build directory
+}

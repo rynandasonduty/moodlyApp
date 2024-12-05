@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "293607772831",
+    "project_id": "moodly-94cba",
+    "storage_bucket": "moodly-94cba.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:293607772831:android:2423ea78e359f74b6008aa",
+        "android_client_info": {
+          "package_name": "com.fpfluttertekber.flutterfptekber"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHtUdeyLNrukSviNDBL9pDn1bj1MGvEUQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

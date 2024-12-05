@@ -1,0 +1,47 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin" // Flutter plugin harus diterapkan setelah plugin Android dan Kotlin.
+    id 'com.google.gms.google-services' // Google services plugin untuk Firebase
+}
+
+android {
+    namespace = "com.fpfluttertekber.flutterfptekber" // Sesuaikan dengan namespace yang Anda inginkan
+    compileSdk = 34 // Tentukan compileSdk yang sesuai dengan aplikasi Anda, atau gunakan flutter.compileSdkVersion jika variabel ini sudah terdefinisi
+
+    ndkVersion = "21.4.7075529" // Tentukan ndkVersion jika diperlukan
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8" // Pastikan JVM target sudah diset ke 1.8
+    }
+
+    defaultConfig {
+        applicationId = "com.fpfluttertekber.flutterfptekber" // Aplikasi ID, pastikan sesuai dengan aplikasi Anda
+        minSdk = 23 // Setidaknya 23 untuk kompatibilitas dengan Firebase
+        targetSdk = 33 // Atur sesuai target SDK yang Anda inginkan
+        versionCode = 1 // Atur sesuai versi aplikasi Anda
+        versionName = "1.0.0" // Atur versi aplikasi Anda
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug // Tentukan signingConfig untuk build release
+        }
+    }
+}
+
+flutter {
+    source = "../.." // Lokasi folder Flutter SDK, pastikan sesuai
+}
+
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:33.6.0') // Menggunakan Firebase BOM untuk kompatibilitas versi
+    implementation 'com.google.firebase:firebase-auth' // Menambahkan Firebase Auth
+    implementation 'com.google.firebase:firebase-firestore' // Jika menggunakan Firestore
+    // Tambahkan dependensi Firebase lainnya yang diperlukan
+}
