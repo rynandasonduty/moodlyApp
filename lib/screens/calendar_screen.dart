@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:async';
@@ -18,6 +20,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
   late DateTime _today;
   late Timer _quoteTimer;
   int _currentQuoteIndex = 0;
+
+  String _userName = ''; // Menyimpan nama pengguna
 
   final List<Map<String, String>> _quotes = [
     {
@@ -51,6 +55,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _focusedDay = _today;
     _selectedDay = _today;
 
+    // Ambil nama pengguna dari Firestore berdasarkan ID pengguna
+    _getUserName();
+
     // Timer untuk mengganti kutipan setiap 10 detik.
     _quoteTimer = Timer.periodic(const Duration(seconds: 8), (timer) {
       setState(() {
@@ -67,6 +74,26 @@ class _CalendarScreenState extends State<CalendarScreen> {
         });
       }
     });
+  }
+
+  // Ambil nama pengguna dari Firestore
+  Future<void> _getUserName() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      // Mengambil nama pengguna dari Firestore
+      DocumentSnapshot userDoc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      if (userDoc.exists) {
+        setState(() {
+          _userName =
+              userDoc['name']; // Sesuaikan dengan nama field di Firestore
+        });
+      }
+    }
   }
 
   @override
@@ -108,9 +135,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Hi, Jude!',
-                      style: TextStyle(
+                    Text(
+                      'Hi, ${_userName.isNotEmpty ? _userName : 'Loading...'}!',
+                      style: const TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,

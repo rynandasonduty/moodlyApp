@@ -24,7 +24,7 @@ android {
         applicationId = "com.fpfluttertekber.flutterfptekber" // Aplikasi ID, pastikan sesuai dengan aplikasi Anda
         minSdk = 23 // Setidaknya 23 untuk kompatibilitas dengan Firebase
         targetSdk = 33 // Atur sesuai target SDK yang Anda inginkan
-        versionCode = 1 // Atur sesuai versi aplikasi Anda
+        versionCode = 2002 // Atur sesuai versi aplikasi Anda
         versionName = "1.0.0" // Atur versi aplikasi Anda
     }
 
